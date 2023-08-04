@@ -1,49 +1,44 @@
 <script setup>
 import { ref } from 'vue'
 
-const min = 1;
-const max = 7;
+// const min = 1;
+// const max = 7;
 
-let worp = {
+let worp = ref({
     1: 0,
     2: 0,
     3: 0,
     4: 0,
     5: 0,
     6: 0,
-};
+});
 
 
-let randomNumb = (min, max) =>  {
-    return Math.floor(Math.random() * (max - min) + min);
-};
+// let randomNumb = (min, max) =>  {
+//     return Math.floor(Math.random() * (max - min) + min);
+// };
 
 
-let randomArr = (min, max) => { 
-    return [...Array(6)].map(() => randomNumb(min, max));
-};
+// let randomArr = (min, max) => { 
+//     return [...Array(6)].map(() => randomNumb(min, max));
+// };
 
 
-const cast = ref({
-   1: {id:1, label: randomNumb(min, max)},
-   2: {id:2, label: randomNumb(min, max)},
-   3: {id:3, label: randomNumb(min, max)},
-   4: {id:4, label: randomNumb(min, max)},
-   5: {id:5, label: randomNumb(min, max)},
-   6: {id:6, label: randomNumb(min, max)},
-})
+// const cast = ref({
+//    1: {id:1, label: randomArr(min, max)}
+// })
 
+const diceArray = ref([])
 
 let gooi = () => {
-    document.getElementById("btn").onclick = gooi;
-    console.log('Er is gegooid');
-    let diceArray = randomArr(min, max);
+    for (let index = 0; index < 6; index++) {
+        diceArray.value.push(Math.ceil(Math.random()*6))        
+    }
     
-    for (const die in worp) {
-        let numberDie = diceArray.filter(number => number == die).length
-        worp[die] = numberDie
-        getal[die-1].innerHTML = numberDie
+    for (const die in worp.value) {
+        worp.value[die] = diceArray.value.filter(number => number == die).length
     };
+    
 };
 
 
@@ -55,14 +50,6 @@ let gooi = () => {
 <template>
   <div id="app">
     <button id="btn" @click="gooi">Gooi</button>
-
-    <ul v-for="({id, label}, index) in cast" :key="id">
-    {{ id }}
-    {{ label }}
-    </ul>
-    
-
- 
   </div>
 </template>
 
