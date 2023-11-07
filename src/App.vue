@@ -1,21 +1,30 @@
 <script setup>
-import { ref, } from 'vue'
-
+import { ref } from 'vue'
 
 let worp = ref({
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-});
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+  });
 
 const numArray = ref([1, 2, 3, 4, 5, 6,])
 
 const diceArray = ref([])
 
-let gooi = () => {
+const gooi = () => {
+
+  worp.value = JSON.parse(JSON.stringify({
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0,
+  }));
+    
     for (let index = 0; index < 6; index++) {
         diceArray.value.push(Math.ceil(Math.random()*6))        
     }
@@ -23,17 +32,18 @@ let gooi = () => {
     for (const die in worp.value) {
         worp.value[die] = diceArray.value.filter(number => number == die).length
     }; 
-   
+    
     console.log(worp.value)
-     
 };
-
 
 
 </script>
 
 
 <template>
+
+  {{  worp }}
+
   <div id="app">
     <button id="btn" @click="gooi">Gooi</button>
   </div>
@@ -47,6 +57,7 @@ let gooi = () => {
         {{ worpen }}
     </li>
   </div>
+  
 </template>
 
 
