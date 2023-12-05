@@ -10,21 +10,15 @@ let worp = ref({
       6: 0,
   });
 
+
 const numArray = ref([1, 2, 3, 4, 5, 6,])
 
 const diceArray = ref([])
 
 const gooi = () => {
+  
+  diceArray.value = []
 
-  worp.value = JSON.parse(JSON.stringify({
-      1: 0,
-      2: 0,
-      3: 0,
-      4: 0,
-      5: 0,
-      6: 0,
-  }));
-    
     for (let index = 0; index < 6; index++) {
         diceArray.value.push(Math.ceil(Math.random()*6))        
     }
@@ -41,8 +35,6 @@ const gooi = () => {
 
 
 <template>
-
-  {{  worp }}
 
   <div id="app">
     <button id="btn" @click="gooi">Gooi</button>
